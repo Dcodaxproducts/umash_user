@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "1041390918251",
+    "project_id": "umash-680d5",
+    "storage_bucket": "umash-680d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041390918251:android:bcd10f31aacd08b170af2e",
+        "android_client_info": {
+          "package_name": "com.umash.deliveryman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4onaREja8rFyFcIS5bGP2Im0wdSndm0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041390918251:android:84484a61f7739ad870af2e",
+        "android_client_info": {
+          "package_name": "com.umash.recipemaker.linecook"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4onaREja8rFyFcIS5bGP2Im0wdSndm0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041390918251:android:5b4b78fe5e8a554f70af2e",
+        "android_client_info": {
+          "package_name": "com.umash.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4onaREja8rFyFcIS5bGP2Im0wdSndm0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
