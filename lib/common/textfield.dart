@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
@@ -9,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefix;
   final bool obscureText;
+  final List<TextInputFormatter>? inputFormatters;
   final EdgeInsetsGeometry? padding;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
@@ -38,6 +40,7 @@ class CustomTextField extends StatelessWidget {
     this.enabled = true,
     this.isOutline = false,
     super.key,
+    this.inputFormatters,
   });
 
   @override
@@ -69,6 +72,7 @@ class CustomTextField extends StatelessWidget {
             obscureText: obscureText,
             validator: validator,
             onChanged: onChanged,
+            inputFormatters: inputFormatters,
             onFieldSubmitted: onSubmitted,
             keyboardType: keyboardType,
             textInputAction: textInputAction,

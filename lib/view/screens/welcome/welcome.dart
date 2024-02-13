@@ -5,6 +5,7 @@ import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/images.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/view/screens/auth/login.dart';
+import 'package:umash_user/view/screens/dashboard/dashboard.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -61,7 +62,7 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 PrimaryButton(
                   text: 'Continue as Guest',
-                  onPressed: () {},
+                  onPressed: () => launchScreen(const DashboardScreen()),
                 ),
                 const SizedBox(height: 32),
               ],

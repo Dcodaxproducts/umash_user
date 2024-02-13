@@ -59,7 +59,7 @@ class CustomizationView extends StatelessWidget {
             onPressed: () {},
             color: primaryColor,
             shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(15)),
+                borderRadius: BorderRadius.circular(50)),
             child: Text(
               "Done",
               style: Theme.of(context)

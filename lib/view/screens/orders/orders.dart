@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
+import 'package:umash_user/view/screens/chat/chat_view.dart';
+import 'package:umash_user/view/screens/dashboard/dashboard.dart';
 import 'package:umash_user/view/screens/orders/widgets/header.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -89,10 +92,15 @@ class OrderWidget extends StatelessWidget {
                     ),
               )),
               const SizedBox(width: 8),
-              Text(
-                'Out For Delivery',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.bold, color: Colors.green),
+              GestureDetector(
+                onTap: () {
+                  launchScreen(const ChatView());
+                },
+                child: Text(
+                  'Out For Delivery',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.bold, color: Colors.green),
+                ),
               ),
             ],
           )

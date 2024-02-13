@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/view/screens/add_to_cart/widgets/delivery_detial_form.dart';
 import 'package:umash_user/view/screens/add_to_cart/widgets/delivery_page_heading.dart';
 import 'package:umash_user/view/screens/add_to_cart/widgets/order_summaery.dart';
+import 'package:umash_user/view/screens/card_details/card_details.dart';
 
 class AddtoCartView extends StatelessWidget {
   const AddtoCartView({super.key});
@@ -16,9 +19,11 @@ class AddtoCartView extends StatelessWidget {
         leading: IconButton(
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(primaryColor)),
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
           icon: const Icon(
-            Iconsax.category,
+            Icons.arrow_back,
             size: 20,
             color: Colors.white,
           ),
@@ -32,10 +37,12 @@ class AddtoCartView extends StatelessWidget {
         padding: pagePadding,
         child: MaterialButton(
             height: 50,
-            onPressed: () {},
+            onPressed: () {
+              launchScreen(CardDetailsView());
+            },
             color: primaryColor,
             shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(15)),
+                borderRadius: BorderRadius.circular(50)),
             child: Text(
               "Proceed To Payment",
               style: Theme.of(context)
