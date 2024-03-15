@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
@@ -32,24 +31,6 @@ class AddtoCartView extends StatelessWidget {
           'Delivery Details',
           style: Theme.of(context).textTheme.displaySmall,
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: pagePadding,
-        child: MaterialButton(
-            height: 50,
-            onPressed: () {
-              launchScreen(CardDetailsView());
-            },
-            color: primaryColor,
-            shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(50)),
-            child: Text(
-              "Proceed To Payment",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
-                  .copyWith(color: Colors.white),
-            )),
       ),
       body: SafeArea(
         child: Padding(
@@ -115,6 +96,22 @@ class AddtoCartView extends StatelessWidget {
             ],
           )),
         ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: pagePadding,
+        child: MaterialButton(
+            height: 50,
+            onPressed: () {},
+            color: primaryColor,
+            shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(50)),
+            child: Text(
+              "Proceed To Payment",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(color: Colors.white),
+            )),
       ),
     );
   }

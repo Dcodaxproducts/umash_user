@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umash_user/utils/colors.dart';
 
 class TotalIngredientContainer extends StatelessWidget {
   const TotalIngredientContainer({super.key});
@@ -9,7 +10,7 @@ class TotalIngredientContainer extends StatelessWidget {
       width: double.infinity,
       height: 66,
       decoration: BoxDecoration(
-          color: Colors.amber,
+          color: secondryColor,
           borderRadius: BorderRadiusDirectional.circular(20)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

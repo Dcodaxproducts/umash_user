@@ -20,7 +20,6 @@ class QuantityWidget extends StatelessWidget {
         InkWell(
           onTap: onRemove,
           child: Container(
-            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(width: 1, color: primaryColor),
@@ -41,7 +40,6 @@ class QuantityWidget extends StatelessWidget {
         InkWell(
           onTap: onAdd,
           child: Container(
-            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(width: 1, color: primaryColor),

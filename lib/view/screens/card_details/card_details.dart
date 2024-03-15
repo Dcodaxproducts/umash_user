@@ -6,7 +6,7 @@ import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/view/screens/card_details/widgets/card_detail_form.dart';
 import 'package:umash_user/view/screens/card_details/widgets/payment_method_list.dart';
-import 'package:umash_user/view/success_screen/success_screen.dart';
+import 'package:umash_user/view/screens/success_screen/success_screen.dart';
 
 class CardDetailsView extends StatelessWidget {
   const CardDetailsView({super.key});
@@ -94,7 +94,7 @@ class PaymentTypeCheckBox extends StatelessWidget {
         width: double.infinity,
         height: 66,
         decoration: BoxDecoration(
-            color: isSelected ? Colors.amber : Colors.white,
+            color: isSelected ? secondryColor : Colors.white,
             border: Border.all(color: isSelected ? primaryColor : Colors.grey),
             borderRadius: BorderRadiusDirectional.circular(20)),
         child: Padding(

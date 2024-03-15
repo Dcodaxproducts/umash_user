@@ -36,7 +36,7 @@ class SocialLoginWidget extends StatelessWidget {
                 image: Images.google,
                 backgroundColor:
                     Theme.of(context).brightness == Brightness.light
-                        ? Colors.white
+                        ? const Color.fromRGBO(242, 242, 242, 1)
                         : Colors.grey.shade800,
                 onPressed: () {},
               ),
@@ -48,7 +48,7 @@ class SocialLoginWidget extends StatelessWidget {
                   image: Images.facebook,
                   backgroundColor:
                       Theme.of(context).brightness == Brightness.light
-                          ? Colors.white
+                          ? const Color.fromRGBO(242, 242, 242, 1)
                           : Colors.grey.shade800,
                   onPressed: () async {}),
             ),

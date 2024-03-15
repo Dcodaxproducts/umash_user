@@ -104,7 +104,7 @@ class SizeOption extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color:
-                    selected ? secondaryColor : Theme.of(context).dividerColor,
+                    selected ? secondryColor : Theme.of(context).dividerColor,
                 shape: BoxShape.circle,
               ),
               child: Text(

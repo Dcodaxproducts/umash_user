@@ -33,10 +33,8 @@ class SenderChatContainer extends StatelessWidget {
                 text,
               ),
               Text(time,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Colors.white)),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.w400)),
             ]),
           ),
           const SizedBox(

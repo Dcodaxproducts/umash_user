@@ -84,7 +84,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: PrimaryButton(
               text: 'Customize',
               radius: 8,
-              color: secondaryColor,
+              color: secondryColor,
               textColor: primaryColor,
               iconData: Iconsax.edit,
               onPressed: () {

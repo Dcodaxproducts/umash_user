@@ -15,7 +15,7 @@ class ProductInfo extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.light
-                ? Colors.grey.shade300
+                ? const Color.fromRGBO(255, 255, 255, 0.3)
                 : Colors.grey.shade800,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.orange),

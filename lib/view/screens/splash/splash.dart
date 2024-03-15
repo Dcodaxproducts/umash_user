@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: secondaryColor,
+        color: secondryColor,
         child: Center(
           child: CustomAnimatedWidget(
             child: Image.asset(

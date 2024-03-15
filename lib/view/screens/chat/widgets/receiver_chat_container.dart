@@ -42,12 +42,15 @@ class ReceiverChatContainer extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 text,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(fontWeight: FontWeight.w400),
               ),
               Text(time,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Colors.grey)),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: const Color.fromRGBO(173, 181, 189, 1),
+                      fontWeight: FontWeight.w400)),
             ]),
           )
         ],

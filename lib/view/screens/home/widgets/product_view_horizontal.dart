@@ -108,7 +108,7 @@ class FoodWidgetHorizontal extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.grey.shade300
+                      ? Colors.white
                       : Colors.grey.shade800,
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(radius)),
