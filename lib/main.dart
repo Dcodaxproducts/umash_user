@@ -14,6 +14,7 @@ import 'theme/dark_theme.dart';
 import 'theme/light_theme.dart';
 import 'utils/app_constants.dart';
 import 'utils/messages.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,41 +31,68 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ThemeController>(
-      builder: (themeController) {
-        return GetBuilder<LocalizationController>(
-          builder: (localizeController) {
-            return GetMaterialApp(
-              title: AppConstants.APP_NAME,
-              debugShowCheckedModeBanner: false,
-              theme: themeController.darkTheme
-                  ? dark(context: context)
-                  : light(context: context),
-              locale: localizeController.locale,
-              translations: Messages(languages: languages),
-              fallbackLocale: Locale(
-                AppConstants.languages[0].languageCode,
-                AppConstants.languages[0].countryCode,
-              ),
-              navigatorObservers: [FlutterSmartDialog.observer],
-              builder: FlutterSmartDialog.init(
-                builder: (context, child) {
-                  var mediaQuery = MediaQuery.of(context);
-                  return MediaQuery(
-                    data: mediaQuery.copyWith(
-                      textScaleFactor: 1.0,
-                      devicePixelRatio: 1.0,
+    final bool isTablet = MediaQuery.of(context).size.shortestSide > 600;
+    final bool isLargeTablet = MediaQuery.of(context).size.shortestSide > 800;
+
+    final Size designSize;
+
+    if (isLargeTablet) {
+      designSize = const Size(1024, 1366);
+    } else if (isTablet) {
+      designSize = const Size(768, 1024);
+    } else {
+      designSize = const Size(411.4, 867.4);
+    }
+
+    return ScreenUtilInit(
+        designSize: designSize,
+        minTextAdapt: true,
+        splitScreenMode: true,
+        fontSizeResolver: (size, util) {
+          return size *
+              (isTablet
+                  ? 1.2
+                  : isLargeTablet
+                      ? 1.4
+                      : util.scaleText);
+        },
+        builder: (context, child) {
+          return GetBuilder<ThemeController>(
+            builder: (themeController) {
+              return GetBuilder<LocalizationController>(
+                builder: (localizeController) {
+                  return GetMaterialApp(
+                    title: AppConstants.APP_NAME,
+                    debugShowCheckedModeBanner: false,
+                    theme: themeController.darkTheme
+                        ? dark(context: context)
+                        : light(context: context),
+                    locale: localizeController.locale,
+                    translations: Messages(languages: languages),
+                    fallbackLocale: Locale(
+                      AppConstants.languages[0].languageCode,
+                      AppConstants.languages[0].countryCode,
                     ),
-                    child: child!,
+                    navigatorObservers: [FlutterSmartDialog.observer],
+                    builder: FlutterSmartDialog.init(
+                      builder: (context, child) {
+                        var mediaQuery = MediaQuery.of(context);
+                        return MediaQuery(
+                          data: mediaQuery.copyWith(
+                            textScaleFactor: 1.0,
+                            devicePixelRatio: 1.0,
+                          ),
+                          child: child!,
+                        );
+                      },
+                      loadingBuilder: (string) => const Loading(),
+                    ),
+                    home: const SplashScreen(),
                   );
                 },
-                loadingBuilder: (string) => const Loading(),
-              ),
-              home: const SplashScreen(),
-            );
-          },
-        );
-      },
-    );
+              );
+            },
+          );
+        });
   }
 }

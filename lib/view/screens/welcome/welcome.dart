@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:umash_user/common/primary_button.dart';
 import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/colors.dart';
@@ -34,14 +35,14 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   'Welcome to',
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 55,
+                        fontSize: 55.sp,
                         fontWeight: FontWeight.bold,
                       ),
                 ),
                 Text(
                   'Umash',
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: 55,
+                        fontSize: 55.sp,
                         fontWeight: FontWeight.bold,
                         color: primaryColor,
                       ),
@@ -50,7 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   'Your favourite foods delivered fast at your door.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontSize: 22,
+                        fontSize: 22.sp,
                         fontWeight: FontWeight.w700,
                       ),
                 ),
@@ -64,7 +65,7 @@ class WelcomeScreen extends StatelessWidget {
                   text: 'Continue as Guest',
                   onPressed: () => launchScreen(const DashboardScreen()),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32.sp),
               ],
             ),
           ),

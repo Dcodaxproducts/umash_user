@@ -69,23 +69,28 @@ class SuccessfulScreen extends StatelessWidget {
               height: 30,
             ),
             SizedBox(
+              height: 60,
               width: double.infinity,
-              child: MaterialButton(
-                  height: 50,
-                  onPressed: () {
-                    launchScreen(const DashboardScreen());
-                  },
-                  color: primaryColor,
-                  shape: ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Text(
-                    "Continue to Shopping",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .copyWith(color: Colors.white),
-                  )),
-            ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                ),
+                onPressed: () {
+                  launchScreen(const DashboardScreen());
+                },
+                child: Text(
+                  'Continue To Shopping',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                ),
+              ),
+            )
           ],
         ),
       ),

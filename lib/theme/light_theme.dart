@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,52 +23,52 @@ ThemeData light({Color color = primaryColor, BuildContext? context}) =>
           outline: const Color(0xFFF4F4F4)),
       textTheme: GoogleFonts.nunitoTextTheme(
         Theme.of(context!).textTheme.copyWith(
-              displayLarge: const TextStyle(
-                fontSize: 30,
+              displayLarge: TextStyle(
+                fontSize: 30.sp,
                 fontWeight: FontWeight.bold,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              displayMedium: const TextStyle(
-                fontSize: 24,
+              displayMedium: TextStyle(
+                fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              displaySmall: const TextStyle(
-                fontSize: 20,
+              displaySmall: TextStyle(
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              headlineMedium: const TextStyle(
-                fontSize: 18,
+              headlineMedium: TextStyle(
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              bodyLarge: const TextStyle(
-                fontSize: 16,
+              bodyLarge: TextStyle(
+                fontSize: 16.sp,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              bodyMedium: const TextStyle(
-                fontSize: 14,
+              bodyMedium: TextStyle(
+                fontSize: 14.sp,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              bodySmall: const TextStyle(
-                fontSize: 12,
+              bodySmall: TextStyle(
+                fontSize: 12.sp,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              titleMedium: const TextStyle(
-                fontSize: 10,
+              titleMedium: TextStyle(
+                fontSize: 10.sp,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
-              titleSmall: const TextStyle(
-                fontSize: 8,
+              titleSmall: TextStyle(
+                fontSize: 8.sp,
                 color: Color(0XFF364141),
                 fontFamily: 'Nunito',
               ),
@@ -85,7 +86,7 @@ ThemeData light({Color color = primaryColor, BuildContext? context}) =>
         centerTitle: true,
         titleTextStyle: GoogleFonts.nunito(
           color: Colors.black,
-          fontSize: 22,
+          fontSize: 22.sp,
           fontWeight: FontWeight.w600,
         ),
       ),

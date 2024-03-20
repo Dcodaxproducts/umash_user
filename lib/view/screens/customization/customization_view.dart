@@ -53,21 +53,27 @@ class CustomizationView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: pagePadding,
-        child: MaterialButton(
-            height: 50,
-            onPressed: () {},
-            color: primaryColor,
-            shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(50)),
-            child: Text(
-              "Done",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
-                  .copyWith(color: Colors.white),
-            )),
-      ),
+          padding: pagePadding,
+          child: SizedBox(
+            height: 60,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32),
+                ),
+              ),
+              onPressed: () {},
+              child: Text(
+                'Done',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+              ),
+            ),
+          )),
     );
   }
 }
