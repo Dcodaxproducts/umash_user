@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umash_user/view/screens/card_details/card_details.dart';
 
+// ignore: must_be_immutable
 class PaymentMethodList extends StatelessWidget {
   PaymentMethodList({super.key});
 

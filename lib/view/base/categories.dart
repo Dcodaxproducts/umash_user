@@ -1,54 +1,54 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:umash_user/common/network_image.dart';
-import 'package:umash_user/data/model/response/category_model.dart';
+import 'package:umash_user/controller/category_controller.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/utils/widget_size.dart';
 import 'animations/animation_builder.dart';
 
 class CategoriesView extends StatelessWidget {
-  final List<CategoryModel> categories;
-  const CategoriesView({required this.categories, super.key});
+  const CategoriesView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return categories.isEmpty
-        ? const SizedBox()
-        : Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Categories',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  height: CustomSize.categoryWidgetSize,
-                  child: CustomAnimationBuilder(
-                    direction: AnimationDirection.fromLeft,
-                    child: ListView.separated(
-                        itemCount: categories.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return CategoryWidget(
-                            image: categories[index].image!,
-                            name: categories[index].name!,
-                            onTap: () {},
-                          );
-                        },
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(width: 20)),
+    return GetBuilder<CategoryController>(builder: (con) {
+      return con.categoryList.isEmpty
+          ? const SizedBox()
+          : Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Categories',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
-                ),
-              ],
-            ),
-          );
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    height: CustomSize.categoryWidgetSize,
+                    child: CustomAnimationBuilder(
+                      direction: AnimationDirection.fromLeft,
+                      child: ListView.separated(
+                          itemCount: con.categoryList.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return CategoryWidget(
+                              image: con.categoryList[index].image!,
+                              name: con.categoryList[index].name!,
+                              onTap: () {},
+                            );
+                          },
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 20)),
+                    ),
+                  ),
+                ],
+              ),
+            );
+    });
   }
 }
 
@@ -80,8 +80,7 @@ class CategoryWidget extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32),
-              child: CustomNetworkImage(
-                  url: 'https://picsum.photos/${Random().nextInt(100)}'),
+              child: CustomNetworkImage(url: image),
             ),
           ),
           const SizedBox(height: 8),

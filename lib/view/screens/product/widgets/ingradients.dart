@@ -1,43 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:umash_user/common/network_image.dart';
+import 'package:umash_user/controller/product_controller.dart';
 
 class IngredientsWidget extends StatelessWidget {
   const IngredientsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16),
-        // ingredients,
-        Text('Ingredients:',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                )),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
-              .map((e) => Column(
-                    children: [
-                      SizedBox(
-                        height: 36,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: const CustomNetworkImage(
-                              url:
-                                  'https://t3.ftcdn.net/jpg/02/05/02/74/360_F_205027453_8Zor4CEdXTirIcxWVMtpzN4zFSdx0VFy.jpg'),
+    return GetBuilder<ProductController>(builder: (con) {
+      final product = con.product!;
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 16.sp),
+          // ingredients,
+          Text('Ingredients:',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  )),
+          SizedBox(height: 8.sp),
+          Wrap(
+            spacing: 16.sp,
+            runSpacing: 16.sp,
+            children: product.addOns!
+                .map((e) => Column(
+                      children: [
+                        SizedBox(
+                          height: 36.sp,
+                          width: 36.sp,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: CustomNetworkImage(url: e.image),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text('Onion'),
-                    ],
-                  ))
-              .toList(),
-        ),
-      ],
-    );
+                        SizedBox(height: 8.sp),
+                        Text(e.name ?? ''),
+                      ],
+                    ))
+                .toList(),
+          ),
+        ],
+      );
+    });
   }
 }

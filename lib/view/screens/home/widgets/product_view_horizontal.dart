@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:umash_user/common/icons.dart';
 import 'package:umash_user/common/network_image.dart';
+import 'package:umash_user/data/model/response/product_model.dart';
 import 'package:umash_user/helper/navigation.dart';
+import 'package:umash_user/helper/price_converter.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/utils/widget_size.dart';
 import 'package:umash_user/view/base/animation_builder.dart';
@@ -11,10 +13,9 @@ import 'package:umash_user/view/screens/product/product_details.dart';
 
 class ProductViewHorizontal extends StatelessWidget {
   final String title;
-  const ProductViewHorizontal({
-    required this.title,
-    super.key,
-  });
+  final List<Product> products;
+  const ProductViewHorizontal(
+      {required this.title, required this.products, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,29 +46,33 @@ class ProductViewHorizontal extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Container(
-            height: CustomSize.foodHeight_H,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3), // changes position of shadow
+          if (products.isNotEmpty)
+            Container(
+              height: CustomSize.foodHeight_H,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: CustomAnimationBuilder(
+                direction: AnimationDirection.fromLeft,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: products.length,
+                  itemBuilder: (context, index) => FoodWidgetHorizontal(
+                    favourite: index.isEven,
+                    product: products[index],
+                  ),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 15),
                 ),
-              ],
-            ),
-            child: CustomAnimationBuilder(
-              direction: AnimationDirection.fromLeft,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) =>
-                    FoodWidgetHorizontal(favourite: index.isEven),
-                separatorBuilder: (context, index) => const SizedBox(width: 15),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -76,12 +81,14 @@ class ProductViewHorizontal extends StatelessWidget {
 
 class FoodWidgetHorizontal extends StatelessWidget {
   final bool favourite;
-  const FoodWidgetHorizontal({required this.favourite, super.key});
+  final Product product;
+  const FoodWidgetHorizontal(
+      {required this.favourite, required this.product, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => launchScreen(const ProductDetailScreen()),
+      onTap: () => launchScreen(ProductDetailScreen(product: product)),
       child: SizedBox(
         width: CustomSize.foodWidth_H,
         child: Stack(
@@ -92,14 +99,12 @@ class FoodWidgetHorizontal extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(radius)),
+                    BorderRadius.vertical(top: Radius.circular(radius)),
               ),
-              child: const ClipRRect(
+              child: ClipRRect(
                 borderRadius:
                     BorderRadius.vertical(top: Radius.circular(radius)),
-                child: CustomNetworkImage(
-                    url:
-                        'https://img.freepik.com/free-photo/delicious-burger-with-many-ingredients-isolated-white-background-tasty-cheeseburger-splash-sauce_90220-1266.jpg?size=626&ext=jpg&ga=GA1.1.107957728.1706082702&semt=sph'),
+                child: CustomNetworkImage(url: product.image!),
               ),
             ),
             Align(
@@ -111,7 +116,7 @@ class FoodWidgetHorizontal extends StatelessWidget {
                       ? Colors.white
                       : Colors.grey.shade800,
                   borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(radius)),
+                      BorderRadius.vertical(top: Radius.circular(radius)),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -119,7 +124,7 @@ class FoodWidgetHorizontal extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Southern Style BBQ',
+                      product.name ?? '',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium,
@@ -128,7 +133,7 @@ class FoodWidgetHorizontal extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'N8,000',
+                          PriceConverter.convertPrice(product.price),
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: Theme.of(context).primaryColor,

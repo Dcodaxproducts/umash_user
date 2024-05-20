@@ -1,117 +1,96 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:umash_user/common/network_image.dart';
+import 'package:umash_user/controller/cart_controller.dart';
+import 'package:umash_user/data/model/body/cart_model.dart';
+import 'package:umash_user/helper/navigation.dart';
+import 'package:umash_user/helper/price_converter.dart';
+import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/view/base/quantity_widget.dart';
+import 'package:umash_user/view/screens/product/product_details.dart';
 
+// ignore: must_be_immutable
 class CartProduct extends StatelessWidget {
-  final String imageUrl;
-  final String productName;
-  final double price;
-  int quantity;
-  final VoidCallback onEditPressed;
-  final VoidCallback onDeletePressed;
-
-  CartProduct({
-    Key? key,
-    required this.imageUrl,
-    required this.productName,
-    required this.price,
-    required this.quantity,
-    required this.onEditPressed,
-    required this.onDeletePressed,
-  }) : super(key: key);
+  final CartModel cartItem;
+  final int index;
+  const CartProduct({Key? key, required this.cartItem, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 125,
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade300,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: CustomNetworkImage(url: imageUrl),
+    return InkWell(
+      onTap: () => launchScreen(
+          ProductDetailScreen(product: cartItem.product!, cartIndex: index)),
+      child: Container(
+        padding: EdgeInsets.all(10.sp),
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(radius),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade300,
+              blurRadius: 4,
+              offset: const Offset(0, 2),
             ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  productName,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '\$${price.toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: Theme.of(context).hintColor,
-                        fontWeight: FontWeight.normal,
+          ],
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 100.sp,
+              height: 100.sp,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(radius),
+                child: CustomNetworkImage(url: cartItem.product?.image ?? ''),
+              ),
+            ),
+            SizedBox(width: 10.sp),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    cartItem.product?.name ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 8.sp),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          PriceConverter.convertPrice(cartItem.price),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                color: Theme.of(context).hintColor,
+                                fontWeight: FontWeight.normal,
+                              ),
+                        ),
                       ),
-                ),
-                const SizedBox(height: 16),
-                StatefulBuilder(builder: (context, setState) {
-                  return QuantityWidget(
-                    quantity: quantity,
-                    onAdd: () {
-                      setState(() {
-                        quantity++;
-                      });
-                    },
-                    onRemove: () {
-                      setState(() {
-                        quantity--;
-                      });
-                    },
-                  );
-                })
-              ],
+                      SizedBox(width: 10.sp),
+                      QuantityWidget(
+                        quantity: cartItem.quantity ?? 0,
+                        onAdd: () => CartController.to.setQuantity(
+                          isIncrement: true,
+                          index: index,
+                        ),
+                        onRemove: () => CartController.to.setQuantity(
+                          isIncrement: false,
+                          index: index,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: -4),
-                icon: const Icon(
-                  Iconsax.edit,
-                  size: 18,
-                ),
-                onPressed: onEditPressed,
-              ),
-              IconButton(
-                visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: -4),
-                icon: const Icon(
-                  Iconsax.trash,
-                  size: 18,
-                ),
-                onPressed: onDeletePressed,
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

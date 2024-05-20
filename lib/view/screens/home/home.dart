@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:umash_user/data/model/response/category_model.dart';
+import 'package:get/get.dart';
+import 'package:umash_user/controller/product_controller.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/view/base/categories.dart';
 import 'package:umash_user/view/screens/home/widgets/product_view_horizontal.dart';
@@ -14,16 +15,22 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           const HomeHeaderWidget(),
-          Expanded(
-              child: ListView(
-            padding: pagePadding,
-            children: [
-              CategoriesView(categories: categories),
-              const ProductViewHorizontal(title: 'Suggested'),
-              const ProductViewHorizontal(title: 'Top Products'),
-              const ProductViewHorizontal(title: 'Extras'),
-            ],
-          ))
+          Expanded(child: GetBuilder<ProductController>(builder: (con) {
+            return ListView(
+              padding: pagePadding,
+              children: [
+                const CategoriesView(),
+                ProductViewHorizontal(
+                  title: 'Top Products',
+                  products: con.popularProductList ?? [],
+                ),
+                ProductViewHorizontal(
+                  title: 'Latest',
+                  products: con.latestProductList ?? [],
+                ),
+              ],
+            );
+          }))
         ],
       ),
     );

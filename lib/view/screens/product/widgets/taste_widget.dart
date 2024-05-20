@@ -1,74 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:umash_user/controller/product_controller.dart';
 import 'package:umash_user/utils/colors.dart';
 
 class TasteSelectionWidget extends StatelessWidget {
-  TasteSelectionWidget({super.key});
-
-  Taste selectedTaste = Taste.sweet;
+  final Function(int)? onSelect;
+  final int seletctedTaste;
+  const TasteSelectionWidget(
+      {required this.onSelect, required this.seletctedTaste, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Select Taste:',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                )),
-        const SizedBox(height: 8),
-        StatefulBuilder(builder: (context, setState) {
-          return Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            children: [
-              TasteOption(
-                text: 'Sweet',
-                selected: selectedTaste == Taste.sweet,
-                onTap: () {
-                  setState(() {
-                    selectedTaste = Taste.sweet;
-                  });
-                },
-              ),
-              TasteOption(
-                  text: 'Sour',
-                  selected: selectedTaste == Taste.sour,
-                  onTap: () {
-                    setState(() {
-                      selectedTaste = Taste.sour;
-                    });
-                  }),
-              TasteOption(
-                  text: 'Bitter',
-                  selected: selectedTaste == Taste.bitter,
-                  onTap: () {
-                    setState(() {
-                      selectedTaste = Taste.bitter;
-                    });
-                  }),
-              TasteOption(
-                text: 'Salty',
-                selected: selectedTaste == Taste.salty,
-                onTap: () {
-                  setState(() {
-                    selectedTaste = Taste.salty;
-                  });
-                },
-              ),
-              TasteOption(
-                  text: 'Umami',
-                  selected: selectedTaste == Taste.umami,
-                  onTap: () {
-                    setState(() {
-                      selectedTaste = Taste.umami;
-                    });
-                  }),
-            ],
-          );
-        }),
-        const SizedBox(height: 16),
-      ],
-    );
+    return GetBuilder<ProductController>(builder: (con) {
+      final tags = con.product?.tags ?? [];
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Select Taste:',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  )),
+          SizedBox(height: 8.sp),
+          StatefulBuilder(builder: (context, setState) {
+            return Wrap(
+              spacing: 16.sp,
+              runSpacing: 16.sp,
+              children: tags
+                  .map((e) => TasteOption(
+                        text: e.tag ?? '',
+                        selected: tags.indexOf(e) == seletctedTaste,
+                        onTap: () => onSelect!(tags.indexOf(e)),
+                      ))
+                  .toList(),
+            );
+          }),
+          SizedBox(height: 16.sp),
+        ],
+      );
+    });
   }
 }
 
@@ -116,5 +86,3 @@ class TasteOption extends StatelessWidget {
     );
   }
 }
-
-enum Taste { sweet, sour, bitter, salty, umami }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomNetworkImage extends StatefulWidget {
@@ -45,8 +46,7 @@ class _CustomNetworkImageState extends State<CustomNetworkImage> {
             color: Theme.of(context).cardColor,
           ),
           child: Icon(
-            Icons.image_outlined,
-            size: 40,
+            Iconsax.gallery,
             color: Theme.of(context).hintColor,
           ),
         );

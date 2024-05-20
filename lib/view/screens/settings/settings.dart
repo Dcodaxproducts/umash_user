@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:umash_user/common/buttons.dart';
+import 'package:umash_user/controller/auth_controller.dart';
 import 'package:umash_user/controller/theme_controller.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
@@ -22,24 +23,29 @@ class SettingScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: pagePadding,
-        children: const [
-          CustomTile(
+        children: [
+          const CustomTile(
             icon: Iconsax.notification,
             text: 'Notifications',
           ),
-          CustomTile(
+          const CustomTile(
             icon: Iconsax.moon,
             text: 'Dark Theme',
             theme: true,
           ),
-          CustomTile(
+          const CustomTile(
             icon: Iconsax.info_circle,
             text: 'About Us',
           ),
-          CustomTile(
+          const CustomTile(
             icon: Iconsax.lock,
             text: 'Terms & Conditions',
+          ),
+          CustomTile(
+            icon: Iconsax.logout,
+            text: 'Sign Out',
             isLast: true,
+            onPressed: AuthController.to.socialLogout,
           ),
         ],
       ),

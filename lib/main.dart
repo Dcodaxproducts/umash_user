@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
               (isTablet
                   ? 1.2
                   : isLargeTablet
-                      ? 1.4
+                      ? 1.0
                       : util.scaleText);
         },
         builder: (context, child) {
@@ -75,16 +75,6 @@ class MyApp extends StatelessWidget {
                     ),
                     navigatorObservers: [FlutterSmartDialog.observer],
                     builder: FlutterSmartDialog.init(
-                      builder: (context, child) {
-                        var mediaQuery = MediaQuery.of(context);
-                        return MediaQuery(
-                          data: mediaQuery.copyWith(
-                            textScaleFactor: 1.0,
-                            devicePixelRatio: 1.0,
-                          ),
-                          child: child!,
-                        );
-                      },
                       loadingBuilder: (string) => const Loading(),
                     ),
                     home: const SplashScreen(),

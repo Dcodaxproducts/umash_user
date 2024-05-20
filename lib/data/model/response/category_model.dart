@@ -1,3 +1,5 @@
+import 'package:umash_user/controller/splash_controller.dart';
+
 class CategoryModel {
   int? id;
   String? name;
@@ -30,7 +32,9 @@ class CategoryModel {
         status: json["status"] ?? 0,
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
-        image: json["image"],
+        image: json["image"] == null
+            ? null
+            : "${SplashController.to.configModel!.baseUrls!.categoryImageUrl!}/${json["image"]}",
         bannerImage: json["banner_image"],
       );
 
@@ -47,37 +51,3 @@ class CategoryModel {
         "banner_image": bannerImage,
       };
 }
-
-// demo data
-List<CategoryModel> categories = [
-  CategoryModel(
-    id: 1,
-    name: "Burger",
-    image: "https://i.imgur.com/1aXHrjX.png",
-  ),
-  CategoryModel(
-    id: 2,
-    name: "Pizza",
-    image: "https://i.imgur.com/1aXHrjX.png",
-  ),
-  CategoryModel(
-    id: 3,
-    name: "Salad",
-    image: "https://i.imgur.com/1aXHrjX.png",
-  ),
-  CategoryModel(
-    id: 4,
-    name: "Sushi",
-    image: "https://i.imgur.com/1aXHrjX.png",
-  ),
-  CategoryModel(
-    id: 5,
-    name: "Dessert",
-    image: "https://i.imgur.com/1aXHrjX.png",
-  ),
-  CategoryModel(
-    id: 6,
-    name: "Drinks",
-    image: "https://i.imgur.com/1aXHrjX.png",
-  ),
-];

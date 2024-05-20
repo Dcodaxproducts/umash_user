@@ -12,7 +12,12 @@
           "package_name": "com.umash.deliveryman"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1041390918251-lhpfvvgigk655546dh1mesam6a6nmj40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB4onaREja8rFyFcIS5bGP2Im0wdSndm0o"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041390918251-lhpfvvgigk655546dh1mesam6a6nmj40.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1041390918251-5ljpnpmhupsjvpmlm31shvvenqqnl72c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.umash.user"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +48,12 @@
           "package_name": "com.umash.recipemaker.linecook"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1041390918251-lhpfvvgigk655546dh1mesam6a6nmj40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB4onaREja8rFyFcIS5bGP2Im0wdSndm0o"
@@ -39,7 +61,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041390918251-lhpfvvgigk655546dh1mesam6a6nmj40.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1041390918251-5ljpnpmhupsjvpmlm31shvvenqqnl72c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.umash.user"
+              }
+            }
+          ]
         }
       }
     },
@@ -50,7 +84,28 @@
           "package_name": "com.umash.user"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1041390918251-6jo72rrcrlm10sjo7pvtdec4suk44mlt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umash.user",
+            "certificate_hash": "5ca835f2c74626885836fdd599a807944e47839d"
+          }
+        },
+        {
+          "client_id": "1041390918251-kso9js2ipphq385rne1lmse4dkca14pe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umash.user",
+            "certificate_hash": "6701169ee3d77324b36edc8129c3998022861aae"
+          }
+        },
+        {
+          "client_id": "1041390918251-lhpfvvgigk655546dh1mesam6a6nmj40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB4onaREja8rFyFcIS5bGP2Im0wdSndm0o"
@@ -58,7 +113,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041390918251-lhpfvvgigk655546dh1mesam6a6nmj40.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1041390918251-5ljpnpmhupsjvpmlm31shvvenqqnl72c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.umash.user"
+              }
+            }
+          ]
         }
       }
     }

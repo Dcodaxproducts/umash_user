@@ -1,10 +1,11 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-EdgeInsets pagePadding = const EdgeInsets.all(16);
-const double radius = 8;
+EdgeInsets get pagePadding => EdgeInsets.all(16.sp);
+double get radius => 8.sp;
 
 class FontStyles {
   // title

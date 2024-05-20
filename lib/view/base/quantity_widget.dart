@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:umash_user/utils/colors.dart';
 
 class QuantityWidget extends StatelessWidget {
@@ -17,39 +18,31 @@ class QuantityWidget extends StatelessWidget {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        InkWell(
-          onTap: onRemove,
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(width: 1, color: primaryColor),
-            ),
-            child: Icon(
-              Icons.remove,
-              size: MediaQuery.sizeOf(context).height * 0.02,
-              color: Theme.of(context).primaryColor,
-            ),
+        IconButton.outlined(
+          color: primaryColor,
+          style: IconButton.styleFrom(
+            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+            padding: EdgeInsets.zero,
+            side: const BorderSide(color: primaryColor),
           ),
+          onPressed: onRemove,
+          icon: Icon(Icons.remove, size: 20.sp),
         ),
-        const SizedBox(width: 8),
+        SizedBox(width: 8.sp),
         Text(
           '$quantity',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        const SizedBox(width: 8),
-        InkWell(
-          onTap: onAdd,
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(width: 1, color: primaryColor),
-            ),
-            child: Icon(
-              Icons.add,
-              size: MediaQuery.sizeOf(context).height * 0.02,
-              color: Theme.of(context).primaryColor,
-            ),
+        SizedBox(width: 8.sp),
+        IconButton.outlined(
+          color: primaryColor,
+          style: IconButton.styleFrom(
+            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+            padding: EdgeInsets.zero,
+            side: const BorderSide(color: primaryColor),
           ),
+          onPressed: onAdd,
+          icon: Icon(Icons.add, size: 20.sp),
         ),
       ],
     );

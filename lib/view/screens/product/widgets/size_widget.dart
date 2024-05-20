@@ -1,62 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:umash_user/data/model/response/product_model.dart';
+import 'package:umash_user/helper/price_converter.dart';
 import 'package:umash_user/utils/colors.dart';
 
 class SizeSelectionWidget extends StatelessWidget {
-  SizeSelectionWidget({super.key});
-
-  TasteSize selectedTasteSize = TasteSize.small;
+  final Variation variation;
+  final List<int> selectedVariation;
+  final Function() onSelected;
+  const SizeSelectionWidget({
+    required this.variation,
+    required this.selectedVariation,
+    required this.onSelected,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Select Taste:',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                )),
-        const SizedBox(height: 8),
-        StatefulBuilder(builder: (context, setState) {
-          return Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            children: [
-              SizeOption(
-                text: 'Small',
-                price: 10,
-                value: '7',
-                selected: selectedTasteSize == TasteSize.small,
-                onTap: () {
-                  setState(() {
-                    selectedTasteSize = TasteSize.small;
-                  });
-                },
-              ),
-              SizeOption(
-                  text: 'Medium',
-                  price: 20,
-                  value: '9',
-                  selected: selectedTasteSize == TasteSize.medium,
+        Row(
+          children: [
+            Text(variation.name!,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(fontWeight: FontWeight.bold)),
+            SizedBox(width: 10.sp),
+            Text(
+              variation.isRequired! ? '(Required *)' : '(Optional)',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: variation.isRequired!
+                        ? Theme.of(context).colorScheme.error
+                        : null,
+                  ),
+            ),
+          ],
+        ),
+        SizedBox(height: 8.sp),
+        Wrap(
+          spacing: 16.sp,
+          runSpacing: 16.sp,
+          children: [
+            for (int index = 0;
+                index < variation.variationValues!.length;
+                index++)
+              Builder(builder: (context) {
+                final e = variation.variationValues![index];
+                return SizeOption(
+                  text: e.label ?? '',
+                  price: PriceConverter.convertPrice(e.optionPrice ?? 0),
+                  selected: selectedVariation.contains(index),
                   onTap: () {
-                    setState(() {
-                      selectedTasteSize = TasteSize.medium;
-                    });
-                  }),
-              SizeOption(
-                text: 'Large',
-                price: 30,
-                value: '11',
-                selected: selectedTasteSize == TasteSize.large,
-                onTap: () {
-                  setState(() {
-                    selectedTasteSize = TasteSize.large;
-                  });
-                },
-              ),
-            ],
-          );
-        }),
-        const SizedBox(height: 16),
+                    if (selectedVariation[0] != index) {
+                      selectedVariation[0] = index;
+                    }
+                    onSelected();
+                  },
+                );
+              }),
+          ],
+        ),
+        SizedBox(height: 16.sp),
       ],
     );
   }
@@ -64,8 +70,7 @@ class SizeSelectionWidget extends StatelessWidget {
 
 class SizeOption extends StatelessWidget {
   final String text;
-  final double price;
-  final String value;
+  final String price;
   final bool selected;
   final void Function()? onTap;
   const SizeOption({
@@ -73,7 +78,6 @@ class SizeOption extends StatelessWidget {
     required this.text,
     this.selected = false,
     required this.price,
-    required this.value,
     this.onTap,
   });
 
@@ -100,21 +104,6 @@ class SizeOption extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                color:
-                    selected ? secondryColor : Theme.of(context).dividerColor,
-                shape: BoxShape.circle,
-              ),
-              child: Text(
-                value,
-                style: TextStyle(
-                  color: selected ? primaryColor : null,
-                ),
-              ),
-            ),
-            const SizedBox(height: 5),
             Text(
               text,
               style: TextStyle(
@@ -123,7 +112,7 @@ class SizeOption extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             Text(
-              '\$$price',
+              price,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
@@ -132,5 +121,3 @@ class SizeOption extends StatelessWidget {
     );
   }
 }
-
-enum TasteSize { small, medium, large }
