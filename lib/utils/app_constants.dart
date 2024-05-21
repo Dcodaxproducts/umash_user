@@ -133,4 +133,19 @@ class AppConstants {
       languageCode: 'ar',
     ),
   ];
+
+  static List<String> addressLabels = [
+    'home',
+    'work',
+    'office',
+    'other',
+  ];
+
+  static List<String> orderStatus = [
+    'pending',
+    'confirmed',
+    'processing',
+    'out_for_delivery',
+    'delivered',
+  ];
 }

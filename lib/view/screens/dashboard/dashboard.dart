@@ -3,11 +3,13 @@ import 'package:iconsax/iconsax.dart';
 import 'package:umash_user/controller/auth_controller.dart';
 import 'package:umash_user/controller/cart_controller.dart';
 import 'package:umash_user/controller/category_controller.dart';
+import 'package:umash_user/controller/location_controller.dart';
 import 'package:umash_user/controller/product_controller.dart';
 import 'package:umash_user/view/screens/cart/cart.dart';
 import 'package:umash_user/view/screens/home/home.dart';
 import 'package:umash_user/view/screens/orders/orders.dart';
 import 'package:umash_user/view/screens/profile/profile.dart';
+import '../../../controller/profile_controller.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -21,12 +23,11 @@ class DashboardScreen extends StatefulWidget {
       ProductController.to.getLatestProductList(reload, '1'),
       ProductController.to.getPopularProductList(reload, '1'),
       // BannerController.to.getBannerList(reload),
-      // WishListController.to.initWishList(),
     ];
     if (reload) {
       if (AuthController.to.isLoggedIn) {
-        // futures.add(ProfileController.to.getUserInfo());
-        // futures.add(LocationController.to.initAddressList());
+        futures.add(ProfileController.to.getUserInfo());
+        futures.add(LocationController.to.initAddressList());
       }
     }
     return await Future.wait(futures);

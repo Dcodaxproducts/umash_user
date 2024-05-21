@@ -15,9 +15,7 @@ import 'package:umash_user/data/repository/location_repo.dart';
 import 'package:umash_user/view/base/permission_dialog.dart';
 import '../data/model/response/address_model.dart';
 import '../data/model/response/response_model.dart';
-import '../helper/navigation.dart';
-import '../theme/maps.dart';
-import '../utils/app_constants.dart';
+import '../view/base/location_picker.dart';
 import 'auth_controller.dart';
 import 'order_controller.dart';
 import 'splash_controller.dart';
@@ -115,7 +113,7 @@ class LocationController extends GetxController implements GetxService {
     ResponseModel responseModel;
     if (response != null) {
       initAddressList();
-      showToast('address_updated_successfully'.tr, success: true);
+      showToast('Address Updated Successfully'.tr, success: true);
       responseModel = successResponse;
     } else {
       responseModel = failedResponse.copyWith(
@@ -132,7 +130,7 @@ class LocationController extends GetxController implements GetxService {
     http.Response? response = await locationRepo.removeAddressByID(id);
     if (response != null) {
       addressList.removeWhere((address) => address.id == id);
-      showToast('address_deleted_successfully'.tr, success: true);
+      showToast('Address Deleted Successfully'.tr, success: true);
     }
     update();
   }
@@ -164,29 +162,13 @@ class LocationController extends GetxController implements GetxService {
       _branchId = branchId;
       return branchId;
     } else {
-      showToast('service_not_available'.tr);
+      showToast('Service not available in your area');
       return branchId;
     }
   }
 
   pickLocation(Function(LatLng latLng, PickResult result) onPick) =>
-      launchScreen(PlacePicker(
-        useCurrentLocation: true,
-        selectInitialPosition: true,
-        apiKey: AppConstants.API_KEY,
-        initialPosition: const LatLng(31.5204, 74.3587),
-        onMapCreated: (controller) {
-          controller.setMapStyle(MAPS_THEME);
-        },
-        onPlacePicked: (result) {
-          pop();
-          LatLng latlng = LatLng(
-            result.geometry!.location.lat,
-            result.geometry!.location.lng,
-          );
-          onPick(latlng, result);
-        },
-      ));
+      locationPicker(onPick);
 
   Future<String> getFormattedAddress(LatLng latLng) async {
     http.Response? response = await locationRepo.getAddressFromGeocode(latLng);

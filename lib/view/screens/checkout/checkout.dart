@@ -47,13 +47,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).cardColor,
       appBar: AppBar(
-        leading: const CustomBackButton(),
-        title: Text('checkout'.tr),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CustomBackButton(),
+        ),
+        title: const Text('Checkout'),
         centerTitle: true,
       ),
       body: ListView(
+        padding: pagePadding,
         children: [
           const DeliveryAddressWidget(),
           const CouponWidget(),
@@ -89,7 +92,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'total'.tr,
+                            'Total'.tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!
@@ -104,12 +107,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       cartController.totalAmount),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleSmall
+                                      .headlineMedium
                                       ?.copyWith(color: Colors.white),
                                 ),
                                 TextSpan(
                                   text:
-                                      ' (${cartController.cartList.length} ${'items'.tr})',
+                                      ' (${cartController.cartList.length} items)',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium
@@ -127,7 +130,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: Wrap(
                         children: [
                           Text(
-                            'confirm_order'.tr,
+                            'Confirm Order'.tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -147,7 +150,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   OrderController orderController = OrderController.to;
                   if (orderController.deliveryType == 'delivery' &&
                       orderController.address == null) {
-                    showToast('select_delivery_address'.tr);
+                    showToast('Select Delivery Address'.tr);
                   } else if (CartController.to.totalAmount <
                       SplashController.to.configModel!.minimumOrderValue!) {
                     showToast(

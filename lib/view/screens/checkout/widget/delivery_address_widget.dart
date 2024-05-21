@@ -10,6 +10,7 @@ import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/view/base/divider.dart';
 import '../../../../controller/location_controller.dart';
 import '../../../../utils/style.dart';
+import '../../address/add_address.dart';
 
 class DeliveryAddressWidget extends StatelessWidget {
   const DeliveryAddressWidget({super.key});
@@ -23,40 +24,14 @@ class DeliveryAddressWidget extends StatelessWidget {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        'delivery_address',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          visualDensity:
-                              const VisualDensity(horizontal: -4, vertical: -4),
-                        ),
-                        child: Text(
-                          con.address == null ? 'select' : 'change_address',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(color: Colors.blue, fontSize: 13.sp),
-                        ),
-                        onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            builder: (_) => const ShippingAddressSheet(),
-                          );
-                        },
-                      ),
-                    ],
+                  Text(
+                    'Delivery Address',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(height: 5.sp),
                   if (con.address != null) ...[
                     Text(
                       con.address!.addressType,
@@ -75,7 +50,41 @@ class DeliveryAddressWidget extends StatelessWidget {
                           .bodySmall
                           ?.copyWith(color: Theme.of(context).hintColor),
                     )
-                  ]
+                  ],
+                  if (con.address == null)
+                    InkWell(
+                      onTap: () {
+                        showBottomSheet(
+                          context: context,
+                          builder: (context) => const ShippingAddressSheet(),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(15.sp),
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Theme.of(context).dividerColor),
+                          borderRadius: BorderRadius.circular(16.sp),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Iconsax.location, size: 20.sp),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                'Select Delivery Address',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                            Icon(
+                              Iconsax.arrow_right_3,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 10),
                 ],
               );
       },
@@ -96,7 +105,7 @@ class ShippingAddressSheet extends StatelessWidget {
             children: [
               // title
               Text(
-                'delivery_address',
+                'Delivery Address',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -164,7 +173,7 @@ class ShippingAddressSheet extends StatelessWidget {
               InkWell(
                 onTap: () {
                   pop();
-                  // launchScreen(const AddAddressScreen(setLocation: true));
+                  launchScreen(const AddAddressScreen(setLocation: true));
                 },
                 child: Row(
                   children: [
@@ -175,7 +184,7 @@ class ShippingAddressSheet extends StatelessWidget {
                     const SizedBox(width: 10),
                     Expanded(
                         child: Text(
-                      'add_new_address',
+                      'Add New Address',
                       style: Theme.of(context).textTheme.bodyMedium,
                     )),
                   ],

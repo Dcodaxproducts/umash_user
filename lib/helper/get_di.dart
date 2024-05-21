@@ -4,8 +4,10 @@ import 'package:umash_user/controller/auth_controller.dart';
 import 'package:umash_user/controller/category_controller.dart';
 import 'package:umash_user/controller/coupon_controller.dart';
 import 'package:umash_user/controller/localization_controller.dart';
+import 'package:umash_user/controller/location_controller.dart';
 import 'package:umash_user/controller/order_controller.dart';
 import 'package:umash_user/controller/product_controller.dart';
+import 'package:umash_user/controller/profile_controller.dart';
 import 'package:umash_user/controller/splash_controller.dart';
 import 'package:umash_user/controller/theme_controller.dart';
 import 'package:umash_user/data/api/api_client.dart';
@@ -15,8 +17,10 @@ import 'package:umash_user/data/repository/cart_repo.dart';
 import 'package:umash_user/data/repository/category_repo.dart';
 import 'package:umash_user/data/repository/coupon_repo.dart';
 import 'package:umash_user/data/repository/language_repo.dart';
+import 'package:umash_user/data/repository/location_repo.dart';
 import 'package:umash_user/data/repository/order_repo.dart';
 import 'package:umash_user/data/repository/product_repo.dart';
+import 'package:umash_user/data/repository/profile_repo.dart';
 import 'package:umash_user/data/repository/splash_repo.dart';
 import 'package:umash_user/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,6 +47,10 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => CouponRepo(apiClient: Get.find()));
   Get.lazyPut(
       () => OrderRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(
+      () => ProfileRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(
+      () => LocationRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
 
   // Controller
   Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
@@ -54,6 +62,8 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
   Get.lazyPut(() => CouponController(couponRepo: Get.find()));
   Get.lazyPut(() => OrderController(orderRepo: Get.find()));
+  Get.lazyPut(() => ProfileController(profileRepo: Get.find()));
+  Get.lazyPut(() => LocationController(locationRepo: Get.find()));
 
   // Retrieving localized data
   Map<String, Map<String, String>> languages = {};
