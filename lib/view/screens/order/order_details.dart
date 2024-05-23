@@ -28,7 +28,7 @@ class OrderDetail extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: CustomBackButton(),
           ),
-          title: Text('order_details'.tr),
+          title: Text('Order Details'.tr),
         ),
         body: orderController.isLoading
             ? const Center(
@@ -75,9 +75,10 @@ class OrderDetail extends StatelessWidget {
                               showDialog(
                                   context: context,
                                   builder: (_) => ConfirmationDialog(
-                                        title: 'cancel_order'.tr,
-                                        subtitle: 'cancel_order_msg'.tr,
-                                        actionText: 'yes'.tr,
+                                        title: 'Cancel Order',
+                                        subtitle:
+                                            'Are you sure you want to cancel this order?',
+                                        actionText: 'Yes',
                                         onAccept: () {
                                           pop();
                                           orderController.cancelOrder(
@@ -85,8 +86,7 @@ class OrderDetail extends StatelessWidget {
                                                   .toString(), (success) {
                                             if (success) {
                                               showToast(
-                                                'order_canceled_successfully'
-                                                    .tr,
+                                                "Order cancelled successfully",
                                                 success: true,
                                               );
                                             }

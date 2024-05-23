@@ -5,6 +5,7 @@ import 'package:umash_user/controller/category_controller.dart';
 import 'package:umash_user/controller/coupon_controller.dart';
 import 'package:umash_user/controller/localization_controller.dart';
 import 'package:umash_user/controller/location_controller.dart';
+import 'package:umash_user/controller/notification_controller.dart';
 import 'package:umash_user/controller/order_controller.dart';
 import 'package:umash_user/controller/product_controller.dart';
 import 'package:umash_user/controller/profile_controller.dart';
@@ -18,6 +19,7 @@ import 'package:umash_user/data/repository/category_repo.dart';
 import 'package:umash_user/data/repository/coupon_repo.dart';
 import 'package:umash_user/data/repository/language_repo.dart';
 import 'package:umash_user/data/repository/location_repo.dart';
+import 'package:umash_user/data/repository/notification_repo.dart';
 import 'package:umash_user/data/repository/order_repo.dart';
 import 'package:umash_user/data/repository/product_repo.dart';
 import 'package:umash_user/data/repository/profile_repo.dart';
@@ -51,6 +53,7 @@ Future<Map<String, Map<String, String>>> init() async {
       () => ProfileRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
   Get.lazyPut(
       () => LocationRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(() => NotificationRepo(apiClient: Get.find()));
 
   // Controller
   Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
@@ -64,6 +67,7 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => OrderController(orderRepo: Get.find()));
   Get.lazyPut(() => ProfileController(profileRepo: Get.find()));
   Get.lazyPut(() => LocationController(locationRepo: Get.find()));
+  Get.lazyPut(() => NotificationController(notificationRepo: Get.find()));
 
   // Retrieving localized data
   Map<String, Map<String, String>> languages = {};

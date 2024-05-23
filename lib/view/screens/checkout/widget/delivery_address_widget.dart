@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:umash_user/controller/order_controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -24,17 +24,40 @@ class DeliveryAddressWidget extends StatelessWidget {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Delivery Address',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Delivery Address',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      if (con.address != null)
+                        TextButton(
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              visualDensity: const VisualDensity(
+                                  horizontal: -4, vertical: -4),
+                            ),
+                            onPressed: () {
+                              showBottomSheet(
+                                context: context,
+                                builder: (context) =>
+                                    const ShippingAddressSheet(),
+                              );
+                            },
+                            child: Text('Change',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor)))
+                    ],
                   ),
                   SizedBox(height: 5.sp),
                   if (con.address != null) ...[
                     Text(
-                      con.address!.addressType,
+                      con.address!.addressType.capitalizeFirst ?? '',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     SizedBox(height: 5.sp),

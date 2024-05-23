@@ -42,37 +42,35 @@ locationPicker(Function(LatLng latLng, PickResult result) onPick) =>
                 borderRadius: BorderRadius.circular(12.sp),
                 child: state == SearchingState.Searching
                     ? const Center(child: CircularProgressIndicator())
-                    :
-                    // isAvailable == -1
-                    //     ? const Center(
-                    //         child: Text('Service not available in this area'),
-                    //       )
-                    //     :
-                    Padding(
-                        padding: EdgeInsets.all(15.sp),
-                        child: Column(
-                          children: [
-                            Text(
-                              selectedPlace?.formattedAddress ?? "",
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
+                    : isAvailable == -1
+                        ? const Center(
+                            child: Text('Service not available in this area'),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.all(15.sp),
+                            child: Column(
+                              children: [
+                                Text(
+                                  selectedPlace?.formattedAddress ?? "",
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                SizedBox(height: 10.sp),
+                                const Spacer(),
+                                IconButton.filled(
+                                  onPressed: () {
+                                    pop();
+                                    LatLng latlng = LatLng(
+                                      selectedPlace!.geometry!.location.lat,
+                                      selectedPlace.geometry!.location.lng,
+                                    );
+                                    onPick(latlng, selectedPlace);
+                                  },
+                                  icon: Icon(Icons.check, size: 30.sp),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 10.sp),
-                            const Spacer(),
-                            IconButton.filled(
-                              onPressed: () {
-                                pop();
-                                LatLng latlng = LatLng(
-                                  selectedPlace!.geometry!.location.lat,
-                                  selectedPlace.geometry!.location.lng,
-                                );
-                                onPick(latlng, selectedPlace);
-                              },
-                              icon: Icon(Icons.check, size: 30.sp),
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
               );
       },
     ));

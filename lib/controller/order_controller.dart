@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'dart:convert';
+import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:umash_user/common/snackbar.dart';
@@ -14,7 +15,9 @@ import 'package:umash_user/data/model/response/track_model.dart';
 import 'package:umash_user/data/repository/order_repo.dart';
 import 'package:umash_user/helper/date_converter.dart';
 import 'auth_controller.dart';
+import 'location_controller.dart';
 import 'splash_controller.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class OrderController extends GetxController implements GetxService {
   final OrderRepo orderRepo;
@@ -95,14 +98,14 @@ class OrderController extends GetxController implements GetxService {
     _distance = -1;
     if (address != null) {
       calculatingDistance = true;
-      // LocationController.to
-      //     .getDistanceInMeter(LatLng(
-      //         double.parse(address.latitude), double.parse(address.longitude)))
-      //     .then((value) {
-      _calculatingDistance = false;
-      // _distance = value ?? -1;
-      update();
-      // });
+      LocationController.to
+          .getDistanceInMeter(LatLng(
+              double.parse(address.latitude), double.parse(address.longitude)))
+          .then((value) {
+        _calculatingDistance = false;
+        _distance = value ?? -1;
+        update();
+      });
     }
     update();
   }
@@ -247,7 +250,7 @@ class OrderController extends GetxController implements GetxService {
     http.Response? response = await orderRepo.placeOrder(placeOrderBody);
     if (response != null) {
       var data = jsonDecode(response.body);
-      // String? message = data['message'];
+      log(data.toString());
       String orderID = data['order_id'].toString();
       callback(true, orderID);
     } else {

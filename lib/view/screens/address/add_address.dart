@@ -40,13 +40,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   _getCurrentLocation() => LocationController.to.getCurrentPosition(
         (position) async {
           LatLng latlng = LatLng(position.latitude, position.longitude);
-          // if (LocationController.to.inServiceArea(latlng) != -1) {
-          _animateCameraAndSetCamera(latlng);
-          _address.text =
-              (await LocationController.to.getFormattedAddress(latlng));
-          // } else {
-          //   _address.text = '';
-          // }
+          if (LocationController.to.inServiceArea(latlng) != -1) {
+            _animateCameraAndSetCamera(latlng);
+            _address.text =
+                (await LocationController.to.getFormattedAddress(latlng));
+          } else {
+            _address.text = '';
+          }
         },
       );
 

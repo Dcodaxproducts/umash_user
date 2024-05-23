@@ -3,10 +3,14 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:umash_user/common/buttons.dart';
 import 'package:umash_user/controller/auth_controller.dart';
+import 'package:umash_user/controller/splash_controller.dart';
 import 'package:umash_user/controller/theme_controller.dart';
+import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/view/base/divider.dart';
+import '../html/html_screen.dart';
+import '../notification/notification_screen.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -24,22 +28,34 @@ class SettingScreen extends StatelessWidget {
       body: ListView(
         padding: pagePadding,
         children: [
-          const CustomTile(
+          CustomTile(
             icon: Iconsax.notification,
             text: 'Notifications',
+            onPressed: () => launchScreen(const NotificationScreen()),
           ),
           const CustomTile(
             icon: Iconsax.moon,
             text: 'Dark Theme',
             theme: true,
           ),
-          const CustomTile(
+          CustomTile(
             icon: Iconsax.info_circle,
-            text: 'About Us',
+            text: 'Abouts Us',
+            onPressed: () => launchScreen(HtmlScreen(
+                html: SplashController.to.configModel?.aboutUs ?? '')),
           ),
-          const CustomTile(
+          CustomTile(
+            icon: Iconsax.lock,
+            text: 'Privacy Policy',
+            onPressed: () => launchScreen(HtmlScreen(
+                html: SplashController.to.configModel?.privacyPolicy ?? '')),
+          ),
+          CustomTile(
             icon: Iconsax.lock,
             text: 'Terms & Conditions',
+            onPressed: () => launchScreen(HtmlScreen(
+                html:
+                    SplashController.to.configModel?.termsAndConditions ?? '')),
           ),
           CustomTile(
             icon: Iconsax.logout,

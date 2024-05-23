@@ -31,7 +31,7 @@ class SeparaterWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       height: 10,
-      color: Theme.of(context).cardColor,
+      color: Colors.grey[100],
     );
   }
 }

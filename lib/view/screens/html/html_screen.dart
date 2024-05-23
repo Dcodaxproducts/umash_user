@@ -12,7 +12,10 @@ class HtmlScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const CustomBackButton(),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CustomBackButton(),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

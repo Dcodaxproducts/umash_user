@@ -27,39 +27,60 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             const CartHeaderWidget(),
             Expanded(
-              child: ListView.separated(
-                padding: pagePadding,
-                itemCount: con.cartList.length,
-                separatorBuilder: (context, index) => SizedBox(height: 10.sp),
-                itemBuilder: (context, index) =>
-                    CartProduct(cartItem: con.cartList[index], index: index),
-              ),
+              child: con.cartList.isEmpty
+                  ? Center(
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Your cart is empty',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Looks like you haven\'t added anything to your cart yet',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ))
+                  : ListView.separated(
+                      padding: pagePadding,
+                      itemCount: con.cartList.length,
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10.sp),
+                      itemBuilder: (context, index) => CartProduct(
+                          cartItem: con.cartList[index], index: index),
+                    ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.sp),
-              child: Column(
-                children: [
-                  const CustomDivider(padding: 20),
-                  ReceiptRow(
-                    title: 'Items Price',
-                    price: con.itemsPrice,
-                  ),
-                  ReceiptRow(
-                    title: 'Addons Price',
-                    price: con.addOnsAmount,
-                  ),
-                ],
+            if (con.cartList.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                child: Column(
+                  children: [
+                    const CustomDivider(padding: 20),
+                    ReceiptRow(
+                      title: 'Items Price',
+                      price: con.itemsPrice,
+                    ),
+                    ReceiptRow(
+                      title: 'Addons Price',
+                      price: con.addOnsAmount,
+                    ),
+                  ],
+                ),
               ),
-            ),
           ],
         ),
-        bottomNavigationBar: Padding(
-          padding: pagePadding,
-          child: PrimaryButton(
-            text: 'Continue to Checkout',
-            onPressed: () => launchScreen(const CheckoutScreen()),
-          ),
-        ),
+        bottomNavigationBar: con.cartList.isEmpty
+            ? null
+            : Padding(
+                padding: pagePadding,
+                child: PrimaryButton(
+                  text: 'Continue to Checkout',
+                  onPressed: () => launchScreen(const CheckoutScreen()),
+                ),
+              ),
       );
     });
   }

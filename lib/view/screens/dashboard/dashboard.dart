@@ -7,9 +7,9 @@ import 'package:umash_user/controller/location_controller.dart';
 import 'package:umash_user/controller/product_controller.dart';
 import 'package:umash_user/view/screens/cart/cart.dart';
 import 'package:umash_user/view/screens/home/home.dart';
-import 'package:umash_user/view/screens/orders/orders.dart';
 import 'package:umash_user/view/screens/profile/profile.dart';
 import '../../../controller/profile_controller.dart';
+import '../order/order.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -42,7 +42,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CartScreen(),
-    const OrderScreen(),
+    const OrderHistoryScreen(),
     const ProfileScreen(),
   ];
 

@@ -148,4 +148,15 @@ class AppConstants {
     'out_for_delivery',
     'delivered',
   ];
+
+  // order status message
+  static Map<String, String> orderStatusMessage = {
+    'pending':
+        'Your order is pending. The restaurant has not confirmed your order yet.',
+    'confirmed': 'Your order has been confirmed by the restaurant.',
+    'processing': 'Your order is being prepared by the restaurant.',
+    'out_for_delivery': 'Your order is out for delivery.',
+    'delivered': 'Your order has been delivered successfully.',
+    'canceled': "Your order has been cancelled."
+  };
 }

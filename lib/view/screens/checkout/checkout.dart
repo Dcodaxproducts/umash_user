@@ -147,7 +147,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ],
                 ),
                 onPressed: () {
-                  OrderController orderController = OrderController.to;
                   if (orderController.deliveryType == 'delivery' &&
                       orderController.address == null) {
                     showToast('Select Delivery Address'.tr);
@@ -208,7 +207,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     }
 
     if (!isAvailable) {
-      showToast('items_not_available'.tr);
+      showToast('One or more items are not available at this time');
     } else if (restaurantClosed) {
       String time = DateConverter.convertTimeRange(
         SplashController
@@ -218,10 +217,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       );
 
       showToast(
-        '${'we_are_closed'.tr} ${'we_accept_order_between'.tr} $time ${'only'.tr}',
+        'We are closed at the moment. We accept orders between $time only.',
       );
     } else if (OrderController.to.calculatingDistance) {
-      showToast('calculating_distance'.tr);
+      showToast('Calculating Distance'.tr);
     } else {
       for (int index = 0; index < CartController.to.cartList.length; index++) {
         CartModel cart = CartController.to.cartList[index];

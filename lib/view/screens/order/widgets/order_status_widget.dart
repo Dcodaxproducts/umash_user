@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:umash_user/helper/date_converter.dart';
 import 'package:umash_user/utils/app_constants.dart';
-
 import '../../../../common/network_image.dart';
 import '../../../../data/model/response/order_details_model.dart';
 import '../../../../helper/navigation.dart';
@@ -23,7 +22,7 @@ class OrderStatusWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'order_status'.tr,
+            'Order Status'.tr,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(height: 5),
@@ -44,7 +43,7 @@ class OrderStatusWidget extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
+              color: Colors.grey.withOpacity(0.1),
               borderRadius: BorderRadius.circular(5),
             ),
             child: Column(
@@ -54,7 +53,7 @@ class OrderStatusWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        orderDetails.orderStatus!.tr,
+                        orderDetails.orderStatus!.capitalizeFirst!,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
@@ -69,7 +68,7 @@ class OrderStatusWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '${orderDetails.orderStatus!}_msg'.tr,
+                  AppConstants.orderStatusMessage[orderDetails.orderStatus!]!,
                   style: FontStyles.bodySmall.copyWith(
                     fontWeight: FontWeight.normal,
                   ),
@@ -101,29 +100,6 @@ class OrderStatusWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                orderDetails.orderType!.tr,
-                style: FontStyles.bodySmall,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  orderDetails.paymentMethod!.tr,
-                  style: FontStyles.bodySmall.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-              ),
-            ],
-          ),
           if (orderDetails.orderConfirmationImage != null) ...[
             const SizedBox(height: 10),
             Container(

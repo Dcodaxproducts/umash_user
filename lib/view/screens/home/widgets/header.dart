@@ -5,8 +5,8 @@ import 'package:umash_user/common/textfield.dart';
 import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
-import 'package:umash_user/view/screens/notifications/notifications.dart';
 import 'package:umash_user/view/screens/settings/settings.dart';
+import '../../notification/notification_screen.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
   const HomeHeaderWidget({super.key});

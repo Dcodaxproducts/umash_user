@@ -1,11 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/order_controller.dart';
 import '../../../data/model/response/order_model.dart';
 import '../../../utils/style.dart';
 import '../../base/animations/animation_builder.dart';
+import 'widgets/header.dart';
 import 'widgets/order_widget.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
@@ -36,49 +37,51 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(builder: (orderController) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text('order_history'.tr),
-          bottom: TabBar(
-            controller: _tabController,
-            labelStyle: Theme.of(context).textTheme.bodyMedium,
-            unselectedLabelColor: Colors.grey,
-            indicatorSize: TabBarIndicatorSize.tab,
-            tabs: [
-              Tab(
-                child: AutoSizeText(
-                  'Running Orders (${orderController.runningOrderList.length})',
-                  maxLines: 1,
-                ),
-              ),
-              Tab(
-                child: AutoSizeText(
-                  'Past Orders (${orderController.historyOrderList.length})',
-                  maxLines: 1,
-                ),
-              ),
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: pagePadding,
-          child: Column(
-            children: [
-              Expanded(
-                  child: TabBarView(
-                controller: _tabController,
-                children: [
-                  OrderList(
-                    orders: orderController.runningOrderList,
-                    orderController: orderController,
+        body: Column(
+          children: [
+            const OrderHeaderWidget(),
+            SizedBox(height: 10.sp),
+            TabBar(
+              controller: _tabController,
+              labelStyle: Theme.of(context).textTheme.bodyMedium,
+              unselectedLabelColor: Colors.grey,
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: [
+                Tab(
+                  child: AutoSizeText(
+                    'Running Orders (${orderController.runningOrderList.length})',
+                    maxLines: 1,
                   ),
-                  OrderList(
-                    orders: orderController.historyOrderList,
-                    orderController: orderController,
-                  )
+                ),
+                Tab(
+                  child: AutoSizeText(
+                    'Past Orders (${orderController.historyOrderList.length})',
+                    maxLines: 1,
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                      child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      OrderList(
+                        orders: orderController.runningOrderList,
+                        orderController: orderController,
+                      ),
+                      OrderList(
+                        orders: orderController.historyOrderList,
+                        orderController: orderController,
+                      )
+                    ],
+                  ))
                 ],
-              ))
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       );
     });
@@ -101,7 +104,7 @@ class OrderList extends StatelessWidget {
             onRefresh: () async => await orderController.getOrderList(),
             child: ListView.separated(
                 itemCount: orderController.loadingOrders ? 10 : orders.length,
-                padding: EdgeInsets.zero,
+                padding: pagePadding,
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 15),
                 itemBuilder: (context, index) {
