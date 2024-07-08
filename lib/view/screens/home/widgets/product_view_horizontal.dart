@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:umash_user/common/icons.dart';
 import 'package:umash_user/common/network_image.dart';
@@ -20,32 +20,18 @@ class ProductViewHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: 16.sp),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ),
-              const SizedBox(width: 5),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  'View All'.tr,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                ),
-              ),
-            ],
+          Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.sp),
           if (products.isNotEmpty)
             Container(
               height: CustomSize.foodHeight_H,
@@ -68,8 +54,7 @@ class ProductViewHorizontal extends StatelessWidget {
                     favourite: index.isEven,
                     product: products[index],
                   ),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 15),
+                  separatorBuilder: (context, index) => SizedBox(width: 15.sp),
                 ),
               ),
             ),
@@ -82,8 +67,12 @@ class ProductViewHorizontal extends StatelessWidget {
 class FoodWidgetHorizontal extends StatelessWidget {
   final bool favourite;
   final Product product;
+  final bool category;
   const FoodWidgetHorizontal(
-      {required this.favourite, required this.product, super.key});
+      {required this.favourite,
+      required this.product,
+      this.category = false,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +83,7 @@ class FoodWidgetHorizontal extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              width: CustomSize.foodWidth_H,
+              width: category ? double.infinity : CustomSize.foodWidth_H,
               height: CustomSize.foodImageHeight_H,
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,

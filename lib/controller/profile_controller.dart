@@ -40,9 +40,9 @@ class ProfileController extends GetxController implements GetxService {
       _userInfoModel = UserInfoModel.fromJson(jsonDecode(response.body));
       responseModel = successResponse;
       if (image != null) {
-        showToast('image_updated_successfully'.tr, success: true);
+        showToast('Image Updated Successfully'.tr, success: true);
       } else {
-        showToast('profile_updated_successfully'.tr, success: true);
+        showToast('Profile Updated Successfully'.tr, success: true);
       }
     } else {
       responseModel = failedResponse;

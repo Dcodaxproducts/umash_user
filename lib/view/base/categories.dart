@@ -3,8 +3,10 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:umash_user/common/network_image.dart';
 import 'package:umash_user/controller/category_controller.dart';
+import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/style.dart';
 import 'package:umash_user/utils/widget_size.dart';
+import 'package:umash_user/view/screens/category/category.dart';
 import 'animations/animation_builder.dart';
 
 class CategoriesView extends StatelessWidget {
@@ -38,7 +40,8 @@ class CategoriesView extends StatelessWidget {
                             return CategoryWidget(
                               image: con.categoryList[index].image!,
                               name: con.categoryList[index].name!,
-                              onTap: () {},
+                              onTap: () => launchScreen(CategoryProductScreen(
+                                  category: con.categoryList[index])),
                             );
                           },
                           separatorBuilder: (context, index) =>

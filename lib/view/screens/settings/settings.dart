@@ -8,7 +8,9 @@ import 'package:umash_user/controller/theme_controller.dart';
 import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/utils/colors.dart';
 import 'package:umash_user/utils/style.dart';
+import 'package:umash_user/view/base/confirmation_dialog.dart';
 import 'package:umash_user/view/base/divider.dart';
+import 'package:umash_user/view/screens/auth/login.dart';
 import '../html/html_screen.dart';
 import '../notification/notification_screen.dart';
 
@@ -59,9 +61,15 @@ class SettingScreen extends StatelessWidget {
           ),
           CustomTile(
             icon: Iconsax.logout,
-            text: 'Sign Out',
+            text: AuthController.to.isLoggedIn ? 'Sign Out' : 'Sign In',
             isLast: true,
-            onPressed: AuthController.to.socialLogout,
+            onPressed: AuthController.to.isLoggedIn
+                ? () => showConfirmationDialog(
+                    title: 'Sign Out',
+                    subtitle: 'Are you sure you want to sign out?',
+                    actionText: 'Sign Out',
+                    onAccept: AuthController.to.socialLogout)
+                : () => launchScreen(const LoginScreen()),
           ),
         ],
       ),

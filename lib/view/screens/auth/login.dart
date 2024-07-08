@@ -14,7 +14,8 @@ import 'package:umash_user/view/screens/dashboard/dashboard.dart';
 import 'widgets/social_login_widget.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final bool fromSetting;
+  const LoginScreen({this.fromSetting = false, super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -43,10 +44,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CustomBackButton(),
-        ),
+        leading: widget.fromSetting
+            ? null
+            : const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CustomBackButton(),
+              ),
         leadingWidth: 70,
       ),
       body: Form(

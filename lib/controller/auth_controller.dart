@@ -11,6 +11,7 @@ import 'package:umash_user/data/model/response/signup_model.dart';
 import 'package:umash_user/data/repository/auth_repo.dart';
 import 'package:umash_user/helper/navigation.dart';
 import 'package:umash_user/view/screens/auth/login.dart';
+import 'profile_controller.dart';
 import 'splash_controller.dart';
 
 class AuthController extends GetxController implements GetxService {
@@ -200,14 +201,15 @@ class AuthController extends GetxController implements GetxService {
   }
 
   Future<void> socialLogout() async {
-    // DashboardController.to.selectedIndex = 0;
     final GoogleSignIn googleSignIn = GoogleSignIn();
     googleSignIn.signOut();
     googleSignIn.disconnect();
     await FacebookAuth.instance.logOut();
-    // ProfileController.to.removeUser();
-    // DashboardController.to.selectedIndex = 0;
+    ProfileController.to.removeUser();
     clearSharedData();
-    launchScreen(const LoginScreen(), pushAndRemove: true);
+    launchScreen(
+      const LoginScreen(fromSetting: true),
+      pushAndRemove: true,
+    );
   }
 }

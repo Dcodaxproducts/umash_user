@@ -19,8 +19,6 @@ class ProfileRepo {
       Map<String, String> body = {
         'f_name': userInfoModel.fName!,
         'l_name': userInfoModel.lName!,
-        'password': password!,
-        'phone': userInfoModel.phone!,
       };
       return await apiClient.postData(
         AppConstants.UPDATE_PROFILE_URI,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:umash_user/common/icons.dart';
 import 'package:umash_user/common/primary_button.dart';
@@ -6,6 +7,7 @@ import 'package:umash_user/common/snackbar.dart';
 import 'package:umash_user/controller/auth_controller.dart';
 import 'package:umash_user/controller/cart_controller.dart';
 import 'package:umash_user/controller/product_controller.dart';
+import 'package:umash_user/controller/wishlist_controller.dart';
 import 'package:umash_user/data/model/body/cart_model.dart';
 import 'package:umash_user/data/model/response/product_model.dart';
 import 'package:umash_user/helper/date_converter.dart';
@@ -149,17 +151,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const CustomIcon(
-                    icon: Iconsax.category,
+                    icon: Iconsax.arrow_left,
                     onTap: pop,
                   ),
                   Text(
                     'Details',
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
-                  CustomIcon(
-                    icon: Iconsax.heart,
-                    onTap: () {},
-                  ),
+                  GetBuilder<WishListController>(builder: (con) {
+                    return CustomIcon(
+                      icon: con.wishIdList.contains(widget.product.id)
+                          ? Iconsax.heart5
+                          : Iconsax.heart,
+                      onTap: () {
+                        if (con.wishIdList.contains(widget.product.id)) {
+                          con.removeFromWishList(widget.product);
+                        } else {
+                          con.addToWishList(widget.product);
+                        }
+                      },
+                    );
+                  }),
                 ],
               ),
               Expanded(

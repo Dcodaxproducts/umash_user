@@ -126,3 +126,12 @@ class UserInfoModel {
     );
   }
 }
+
+List<String> splitFullName(String fullName) {
+  List<String> nameParts = fullName.split(' ');
+
+  String firstName = nameParts[0];
+  String lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
+
+  return [firstName, lastName];
+}
